@@ -73,3 +73,11 @@ print(skewness)
 
 #resistance_dataset_one_way_anova <- aov(TIME_HOLDING_POSTEXPOSURE ~ MORTALITY_ADJUSTED, data = resistance_dataset)
 #summary(resistance_dataset_one_way_anova)
+
+
+##Univariate Plots
+#column_to_plot <- as.numeric(as.character(resistance_dataset[, 21]))
+#unique(column_to_plot)
+#hist(column_to_plot, main = names(resistance_dataset)[21], breaks = 20, col = "lightblue", na.rm = TRUE)
+
+
