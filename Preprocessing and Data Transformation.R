@@ -37,7 +37,7 @@ if (!is.element("Amelia", installed.packages()[, 1])) {
 require("Amelia")
 
 #Load the Dataset
-resistance_dataset <- read.csv("data/intensity_concentration.csv")
+resistance_dataset <- read.csv("data/resistance_dataset_new.csv")
 resistance_dataset$MOSQUITO_NUMBER <- as.numeric(as.character(resistance_dataset$MOSQUITO_NUMBER))
 
 #Create subset of Variables/Features
@@ -77,4 +77,9 @@ gg_miss_var(resistance_dataset)
 vis_miss(resistance_dataset) + theme(axis.text.x = element_text(angle = 80))
 
 #Use the MICE package to perform data imputation 
-sapply(resistance_dataset, class)
+somewhat_correlated_variables <- quickpred(resistance_dataset, mincor = 0.3)
+
+resistance_dataset_mice <- mice(resistance_dataset, m = 11, method = "pmm",
+                            seed = 7,
+                            predictorMatrix = somewhat_correlated_variables)
+
