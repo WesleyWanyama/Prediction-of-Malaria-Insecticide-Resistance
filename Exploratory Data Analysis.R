@@ -263,6 +263,7 @@ remove_special_characters <- function(doc) {
   gsub("[^a-zA-Z0-9 ]", "", doc, ignore.case = TRUE)
 }
 
+
 resistance_dataset$INSECTICIDE_CONC <- sapply(resistance_dataset$INSECTICIDE_CONC, remove_special_characters)
 
 ##Removing letter "g" from insecticide conc
@@ -271,3 +272,20 @@ resistance_dataset$INSECTICIDE_CONC <- gsub("g", "", resistance_dataset$INSECTIC
 
 ##Removing the HRS and MINS from Time holding exposure column
 resistance_dataset$TIME_HOLDING_POSTEXPOSURE <- as.numeric(gsub("[^0-9.]", "", resistance_dataset$TIME_HOLDING_POSTEXPOSURE))
+
+#Data cleansing for qualitative data
+resistance_dataset_new <- resistance_dataset %>%
+  mutate(INSECTICIDE_INTENSITY = case_when(
+    INSECTICIDE_INTENSITY == 1 ~ "Low",
+    INSECTICIDE_INTENSITY == 5 ~ "Medium",
+    INSECTICIDE_INTENSITY == 10 ~ "High",
+    TRUE ~ as.character(INSECTICIDE_INTENSITY)  
+  ))
+
+#Convert Insecticide_conc to %
+resistance_dataset_new$INSECTICIDE_CONC <- as.numeric(as.character(resistance_dataset_new$INSECTICIDE_CONC))
+resistance_dataset_new$INSECTICIDE_CONC <- resistance_dataset_new$INSECTICIDE_CONC / 100
+
+##Saving the File
+write.csv(resistance_dataset_new,
+          file = "data/resistance_dataset_new.csv")
