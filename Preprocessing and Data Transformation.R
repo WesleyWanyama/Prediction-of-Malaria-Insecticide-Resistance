@@ -83,3 +83,36 @@ resistance_dataset_mice <- mice(resistance_dataset, m = 11, method = "pmm",
                             seed = 7,
                             predictorMatrix = somewhat_correlated_variables)
 
+#Impute the missing data
+resistance_dataset_imputed <- mice::complete(resistance_dataset_mice, 1)
+
+#Confirm the missingness in the imputed dataset
+miss_var_summary(resistance_dataset_imputed)
+
+# A visual confirmation that the dataset has no more missing values in any
+# feature:
+Amelia::missmap(resistance_dataset_imputed)
+
+# Are there missing values in the dataset?
+any_na(resistance_dataset_imputed)
+
+# How many?
+n_miss(resistance_dataset_imputed)
+
+# Which variables contain the most missing values?
+gg_miss_var(resistance_dataset_imputed)
+
+#Replacing the missing value in INSECTICIDE_INTENSITY
+resistance_dataset_imputed$INSECTICIDE_INTENSITY <- ifelse(
+  is.na(resistance_dataset_imputed$INSECTICIDE_INTENSITY),
+  "Medium",
+  resistance_dataset_imputed$INSECTICIDE_INTENSITY
+)
+
+any_na(resistance_dataset_imputed)
+
+
+
+# *****************************************************************************
+#Exposing the Structure of Data using Data Transforms ----
+
