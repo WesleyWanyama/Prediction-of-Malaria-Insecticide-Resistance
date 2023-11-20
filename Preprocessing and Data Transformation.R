@@ -36,6 +36,16 @@ if (!is.element("Amelia", installed.packages()[, 1])) {
 }
 require("Amelia")
 
+## caret ----
+if (require("caret")) {
+  require("caret")
+} else {
+  install.packages("caret", dependencies = TRUE,
+                   repos = "https://cloud.r-project.org")
+}
+# Load the caret package
+library(caret)
+
 #Load the Dataset
 resistance_dataset <- read.csv("data/resistance_dataset_new.csv")
 resistance_dataset$MOSQUITO_NUMBER <- as.numeric(as.character(resistance_dataset$MOSQUITO_NUMBER))
@@ -115,4 +125,51 @@ any_na(resistance_dataset_imputed)
 
 # *****************************************************************************
 #Exposing the Structure of Data using Data Transforms ----
+##Scale Data Transform
+### The Scale Basic Transform on the Insecticide Resistance Dataset ----
+# BEFORE
+summary(resistance_dataset_imputed)
+hist(resistance_dataset_imputed[, 6], main = names(resistance_dataset_imputed)[6])
+hist(resistance_dataset_imputed[, 12], main = names(resistance_dataset_imputed)[12])
+hist(resistance_dataset_imputed[, 13], main = names(resistance_dataset_imputed)[13])
+
+model_of_the_transform <- preProcess(resistance_dataset_imputed, method = c("scale"))
+print(model_of_the_transform)
+resistance_data_scale_transform <- predict(model_of_the_transform,
+                                          resistance_dataset_imputed)
+
+# AFTER
+summary(resistance_data_scale_transform)
+hist(resistance_data_scale_transform[, 6],
+     main = names(resistance_data_scale_transform)[6])
+hist(resistance_data_scale_transform[, 12],
+     main = names(resistance_data_scale_transform)[12])
+hist(resistance_data_scale_transform[, 13],
+     main = names(resistance_data_scale_transform)[13])
+
+#Center Data Transform
+### The Centre Basic Transform on the Insecticide Resistance Dataset ----
+# BEFORE
+summary(resistance_dataset_imputed)
+boxplot(resistance_dataset_imputed[, 6], main = names(resistance_dataset_imputed)[6])
+boxplot(resistance_dataset_imputed[, 12], main = names(resistance_dataset_imputed)[12])
+boxplot(resistance_dataset_imputed[, 13], main = names(resistance_dataset_imputed)[13])
+
+model_of_the_transform <- preProcess(resistance_dataset_imputed, method = c("center"))
+print(model_of_the_transform)
+resistance_data_center_transform <- predict(model_of_the_transform, # nolint
+                                           resistance_dataset_imputed)
+
+# AFTER
+summary(resistance_data_center_transform)
+boxplot(resistance_data_center_transform[, 6],
+        main = names(resistance_data_center_transform)[6])
+boxplot(resistance_data_center_transform[, 12],
+        main = names(resistance_data_center_transform)[12])
+boxplot(resistance_data_center_transform[, 13],
+        main = names(resistance_data_center_transform)[13])
+
+##Saving the File
+write.csv(resistance_dataset_imputed,
+          file = "data/resistance_dataset_imputed.csv")
 
