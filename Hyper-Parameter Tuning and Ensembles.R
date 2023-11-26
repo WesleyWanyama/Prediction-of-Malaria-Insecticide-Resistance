@@ -32,6 +32,17 @@ if (require("RRF")) {
   install.packages("RRF", dependencies = TRUE,
                    repos = "https://cloud.r-project.org")
 }
+## readr ----
+if (require("readr")) {
+  require("readr")
+} else {
+  install.packages("readr", dependencies = TRUE,
+                   repos = "https://cloud.r-project.org")
+}
+
+
+#Dataset ----
+resistance_dataset <- read_csv("data/resistance_dataset_imputed.csv")
 # Remove rows with NAs in the target variable
 resistance_dataset <- resistance_dataset[complete.cases(resistance_dataset$RESISTANCE_INTENSITY), ]
 unique(resistance_dataset$RESISTANCE_INTENSITY)
@@ -60,7 +71,7 @@ nzv_vars <- nearZeroVar(resistance_dataset)
 resistance_dataset <- resistance_dataset[, -nzv_vars]
 
 
-#Dataset ----
+
 resistance_independent_variables <- resistance_dataset[, 1:13]
 resistance_dependent_variables <- resistance_dataset[, 14]
 
@@ -95,27 +106,6 @@ resistance_model_random_search_rf <- train(RESISTANCE_INTENSITY ~ ., data = resi
 print(resistance_model_random_search_rf)
 plot(resistance_model_random_search_rf)
 
-# Apply a "Grid Search" to identify the best parameter value ----
-# Each axis of the grid is an algorithm parameter, and points on the grid are
-# specific combinations of parameters.
-
-train_control <- trainControl(method = "repeatedcv", number = 10, repeats = 3,
-                              search = "grid")
-set.seed(seed)
-
-getModelInfo("RRFglobal")
-
-tunegrid <- expand.grid(.mtry = c(1:10),
-                        .coefReg = seq(from = 0.1, to = 1, by = 0.1))
-
-resistance_model_grid_search_rrf_global <- train(RESISTANCE_INTENSITY ~ ., data = resistance_dataset, # nolint
-                                            method = "RRFglobal",
-                                            metric = metric,
-                                            tuneGrid = tunegrid,
-                                            trControl = train_control)
-print(resistance_model_grid_search_rrf_global)
-plot(resistance_model_grid_search_rrf_global)
-
 # Apply a "Manual Search" to identify the best parameter value ----
 
 train_control <- trainControl(method = "repeatedcv", number = 10,
@@ -141,3 +131,96 @@ print(modellist)
 results <- resamples(modellist)
 summary(results)
 dotplot(results)
+
+
+# *****************************************************************************
+# Ensemble Methods ----
+## caretEnsemble ----
+if (require("caretEnsemble")) {
+  require("caretEnsemble")
+} else {
+  install.packages("caretEnsemble", dependencies = TRUE,
+                   repos = "https://cloud.r-project.org")
+}
+
+## C50 ----
+if (require("C50")) {
+  require("C50")
+} else {
+  install.packages("C50", dependencies = TRUE,
+                   repos = "https://cloud.r-project.org")
+}
+
+## adabag ----
+if (require("adabag")) {
+  require("adabag")
+} else {
+  install.packages("adabag", dependencies = TRUE,
+                   repos = "https://cloud.r-project.org")
+}
+
+# 1. Bagging ----
+# Two popular bagging algorithms are:
+## 1. Bagged CART
+## 2. Random Forest
+
+# Example of Bagging algorithms
+train_control <- trainControl(method = "repeatedcv", number = 10, repeats = 3)
+seed <- 7
+metric <- "Accuracy"
+
+## 2.a. Bagged CART ----
+set.seed(seed)
+resistance_model_bagged_cart <- train(RESISTANCE_INTENSITY ~ ., data = resistance_dataset, method = "treebag",
+                               metric = metric,
+                               trControl = train_control)
+
+## 2.b. Random Forest ----
+set.seed(seed)
+resistance_model_rf <- train(RESISTANCE_INTENSITY ~ ., data = resistance_dataset, method = "rf",
+                      metric = metric, trControl = train_control)
+
+# Summarize results
+bagging_results <-
+  resamples(list("Bagged Decision Tree" = resistance_model_bagged_cart,
+                 "Random Forest" = resistance_model_rf))
+
+summary(bagging_results)
+dotplot(bagging_results)
+
+
+# *****************************************************************************
+#Saving the Model ----
+
+## plumber ----
+if (require("plumber")) {
+  require("plumber")
+} else {
+  install.packages("plumber", dependencies = TRUE,
+                   repos = "https://cloud.r-project.org")
+}
+
+
+# Test the Model ----
+# create an 80%/20% data split for training and testing datasets respectively
+set.seed(9)
+train_index <- createDataPartition(resistance_dataset$RESISTANCE_INTENSITY,
+                                   p = 0.80, list = FALSE)
+resistance_training <- resistance_dataset[train_index, ]
+resistance_testing <- resistance_dataset[-train_index, ]
+
+set.seed(9)
+predictions <- predict(resistance_model_default_rf, newdata = resistance_testing)
+confusionMatrix(predictions, resistance_testing$RESISTANCE_INTENSITY)
+
+
+# Save and Load your Model ----
+saveRDS(resistance_model_default_rf, "./models/saved_resistance_model_rf.rds")
+# The saved model can then be loaded later as follows:
+loaded_resistance_model_rf <- readRDS("./models/saved_resistance_model_rf.rds")
+print(loaded_resistance_model_rf)
+
+predictions_with_loaded_model <-
+  predict(loaded_resistance_model_rf, newdata = resistance_testing)
+confusionMatrix(predictions_with_loaded_model, resistance_testing$RESISTANCE_INTENSITY)
+
