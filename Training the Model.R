@@ -128,5 +128,88 @@ if (require("pROC")) {
 # 1. Accuracy and Cohen's Kappa ----
 print(confusion_matrix)
 
-# 2. RMSE, R Squared, and MAE ----
+# *****************************************************************************
+#Model Performance Comparison ----
+sapply(resistance_dataset, class)
+sum(is.na(resistance_dataset$RESISTANCE_INTENSITY))
+# Remove rows with NAs in the target variable
+resistance_dataset <- resistance_dataset[complete.cases(resistance_dataset$RESISTANCE_INTENSITY), ]
+unique(resistance_dataset$RESISTANCE_INTENSITY)
+resistance_dataset <- resistance_dataset[resistance_dataset$RESISTANCE_INTENSITY != "N/A", ]
+# Convert 'INSECTICIDE_CONC' to numeric
+resistance_dataset$INSECTICIDE_CONC <- as.numeric(resistance_dataset$INSECTICIDE_CONC)
+# Convert target variable to factor 
+resistance_dataset$RESISTANCE_INTENSITY <- as.factor(resistance_dataset$RESISTANCE_INTENSITY)
+unique(resistance_dataset$RESISTANCE_INTENSITY)
+unique(resistance_dataset$STAGE_ORIGIN)
+# Exclude rows with 'NR' in the 'STAGE_ORIGIN' variable
+resistance_dataset <- subset(resistance_dataset, STAGE_ORIGIN != "NR")
+unique(resistance_dataset$RESISTANCE_INTENSITY)
+# Remove rows with variations of 'N/A' in the outcome variable
+resistance_dataset <- subset(resistance_dataset, 
+                             !grepl("N/A", RESISTANCE_INTENSITY, fixed = TRUE))
+unique(resistance_dataset$RESISTANCE_INTENSITY)
+subset(resistance_dataset, grepl("N/A", RESISTANCE_INTENSITY, fixed = TRUE))
+# Reassign levels without 'N/A'
+resistance_dataset$RESISTANCE_INTENSITY <- factor(resistance_dataset$RESISTANCE_INTENSITY, levels = levels(resistance_dataset$RESISTANCE_INTENSITY)[-6])
+unique(resistance_dataset$RESISTANCE_INTENSITY)
+library(caret)
 
+# Identify and remove near-zero variance variables
+nzv_vars <- nearZeroVar(resistance_dataset)
+resistance_dataset <- resistance_dataset[, -nzv_vars]
+
+
+
+train_control <- trainControl(method = "repeatedcv", number = 10, repeats = 3)
+
+
+### CART ----
+set.seed(7)
+resistance_model_cart <- train(RESISTANCE_INTENSITY ~ ., data = resistance_dataset,
+                             method = "rpart", trControl = train_control)
+
+### KNN ----
+set.seed(7)
+resistance_model_knn <- train(RESISTANCE_INTENSITY ~ ., data = resistance_dataset,
+                            method = "knn", trControl = train_control)
+
+### Random Forest ----
+set.seed(7)
+resistance_model_rf <- train(RESISTANCE_INTENSITY ~ ., data = resistance_dataset,
+                           method = "rf", trControl = train_control)
+
+##Call the `resamples` Function ----
+# We then create a list of the model results and pass the list as an argument
+# to the `resamples` function.
+
+results <- resamples(list(CART = resistance_model_cart, KNN = resistance_model_knn, 
+                          RF = resistance_model_rf))
+
+#Display the Results ----
+## 1. Table Summary ----
+# This is the simplest comparison. It creates a table with one model per row
+# and its corresponding evaluation metrics displayed per column.
+
+summary(results)
+
+## 2. Box and Whisker Plot ----
+# This is useful for visually observing the spread of the estimated accuracies
+# for different algorithms and how they relate.
+
+scales <- list(x = list(relation = "free"), y = list(relation = "free"))
+bwplot(results, scales = scales)
+
+## 3. Dot Plots ----
+# They show both the mean estimated accuracy as well as the 95% confidence
+# interval (e.g. the range in which 95% of observed scores fell).
+
+scales <- list(x = list(relation = "free"), y = list(relation = "free"))
+dotplot(results, scales = scales)
+
+## 4. Scatter Plot Matrix ----
+# This is useful when considering whether the predictions from two
+# different algorithms are correlated. If weakly correlated, then they are good
+# candidates for being combined in an ensemble prediction.
+
+splom(results)
