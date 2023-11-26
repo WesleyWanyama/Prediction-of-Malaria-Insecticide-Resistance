@@ -32,6 +32,33 @@ if (require("RRF")) {
   install.packages("RRF", dependencies = TRUE,
                    repos = "https://cloud.r-project.org")
 }
+# Remove rows with NAs in the target variable
+resistance_dataset <- resistance_dataset[complete.cases(resistance_dataset$RESISTANCE_INTENSITY), ]
+unique(resistance_dataset$RESISTANCE_INTENSITY)
+resistance_dataset <- resistance_dataset[resistance_dataset$RESISTANCE_INTENSITY != "N/A", ]
+# Convert 'INSECTICIDE_CONC' to numeric
+resistance_dataset$INSECTICIDE_CONC <- as.numeric(resistance_dataset$INSECTICIDE_CONC)
+# Convert target variable to factor 
+resistance_dataset$RESISTANCE_INTENSITY <- as.factor(resistance_dataset$RESISTANCE_INTENSITY)
+unique(resistance_dataset$RESISTANCE_INTENSITY)
+unique(resistance_dataset$STAGE_ORIGIN)
+# Exclude rows with 'NR' in the 'STAGE_ORIGIN' variable
+resistance_dataset <- subset(resistance_dataset, STAGE_ORIGIN != "NR")
+unique(resistance_dataset$RESISTANCE_INTENSITY)
+# Remove rows with variations of 'N/A' in the outcome variable
+resistance_dataset <- subset(resistance_dataset, 
+                             !grepl("N/A", RESISTANCE_INTENSITY, fixed = TRUE))
+unique(resistance_dataset$RESISTANCE_INTENSITY)
+subset(resistance_dataset, grepl("N/A", RESISTANCE_INTENSITY, fixed = TRUE))
+# Reassign levels without 'N/A'
+resistance_dataset$RESISTANCE_INTENSITY <- factor(resistance_dataset$RESISTANCE_INTENSITY, levels = levels(resistance_dataset$RESISTANCE_INTENSITY)[-6])
+unique(resistance_dataset$RESISTANCE_INTENSITY)
+library(caret)
+
+# Identify and remove near-zero variance variables
+nzv_vars <- nearZeroVar(resistance_dataset)
+resistance_dataset <- resistance_dataset[, -nzv_vars]
+
 
 #Dataset ----
 resistance_independent_variables <- resistance_dataset[, 1:13]
