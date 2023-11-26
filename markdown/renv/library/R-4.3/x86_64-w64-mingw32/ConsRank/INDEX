@@ -1,0 +1,62 @@
+APAFULL                 American Psychological Association dataset,
+                        full version
+APAred                  American Psychological Association dataset,
+                        reduced version with only full rankings
+BBFULL                  Branch-and-Bound algorithm to find the median
+                        ranking in the space of full (or complete)
+                        rankings.
+BU                      Brook and Upton data
+ConsRank-deprecated     Deprecated functions in ConsRank
+ConsRank-package        Median Ranking Approach According to the
+                        Kemeny's Axiomatic Approach
+DECOR                   Differential Evolution algorithm for Median
+                        Ranking
+EMCons                  Branch-and-bound algorithm to find consensus
+                        (median) ranking according to the Kemeny's
+                        axiomatic approach
+EMD                     Emond and Mason data
+FASTDECOR               FAST algorithm calling DECOR
+FASTcons                FAST algorithm to find consensus (median)
+                        ranking. FAST algorithm to find consensus
+                        (median) ranking defined by Amodio, D'Ambrosio
+                        and Siciliano (2016). It returns at least one
+                        of the solutions. If there are multiple
+                        solutions, sometimes it returns all the
+                        solutions, sometimes it returns some solutions,
+                        always it returns at least one solution.
+German                  German political goals
+Idea                    Idea data set
+QuickCons               Quick algorithm to find up to 4 solutions to
+                        the consensus ranking problem
+USAranks                USA rank data
+combinpmatr             Combined input matrix of a data set
+consrank                Branch-and-bound and heuristic algorithms to
+                        find consensus (median) ranking according to
+                        the Kemeny's axiomatic approach
+iw_kemenyd              Item-weighted Kemeny distance
+iw_tau_x                Item-weighted TauX rank correlation coefficient
+iwcombinpmatr           Item-weighted Combined input matrix of a data
+                        set
+iwquickcons             The item-weighted Quick algorithm to find up to
+                        4 solutions to the consensus ranking problem
+kemenyd                 Kemeny distance
+kemenydesign            Auxiliary function
+kemenyscore             Score matrix according Kemeny (1962)
+labels                  Transform a ranking into a ordering.
+order2rank              Given an ordering, it is transformed to a
+                        ranking
+partitions              Generate partitions of n items constrained into
+                        k non empty subsets
+polyplot                Plot rankings on a permutation polytope of 3 o
+                        4 objects containing all possible ties
+rank2order              Given a rank, it is transformed to a ordering
+reordering              Given a vector (or a matrix), returns an
+                        ordered vector (or a matrix with ordered
+                        vectors)
+scorematrix             Score matrix according Emond and Mason (2002)
+sports                  sports data
+stirling2               Stirling numbers of the second kind
+tabulaterows            Frequency distribution of a sample of rankings
+tau_x                   TauX (tau exstension) rank correlation
+                        coefficient
+univranks               Generate the universe of rankings

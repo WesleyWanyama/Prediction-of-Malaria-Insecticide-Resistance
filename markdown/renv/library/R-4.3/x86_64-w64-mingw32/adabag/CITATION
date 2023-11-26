@@ -1,0 +1,21 @@
+citHeader("To cite adabag in publications use:")
+
+bibentry(bibtype = "Article",
+  title        = "{adabag}: An {R} Package for Classification with Boosting and Bagging",
+  author       = c(person("Esteban", "Alfaro"),
+                   person("Matías", "Gámez"),
+                   person("Noelia", "García")),
+  journal      = "Journal of Statistical Software",
+  year         = "2013",
+  volume       = "54",
+  number       = "2",
+  pages        = "1--35",
+  doi          = "10.18637/jss.v054.i02",
+
+  textVersion  =
+  paste("Alfaro, E., Gamez, M. Garcia, N.(2013).",
+        "adabag: An R Package for Classification with Boosting and Bagging.",
+        "Journal of Statistical Software, 54(2), 1-35.",
+        "DOI https://doi.org/10.18637/jss.v054.i02")
+)
+

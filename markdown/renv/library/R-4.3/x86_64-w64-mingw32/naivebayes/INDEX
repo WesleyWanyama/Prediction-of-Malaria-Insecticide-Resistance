@@ -1,0 +1,40 @@
+%class%                 Predict Method for Family of Naive Bayes
+                        Objects
+bernoulli_naive_bayes   Bernoulli Naive Bayes Classifier
+coef.bernoulli_naive_bayes
+                        Extract Model Coefficients
+gaussian_naive_bayes    Gaussian Naive Bayes Classifier
+get_cond_dist           Obtain names of class conditional distribution
+                        assigned to features
+multinomial_naive_bayes
+                        Multinomial Naive Bayes Classifier
+naive_bayes             Naive Bayes Classifier
+naivebayes              naivebayes
+nonparametric_naive_bayes
+                        Non-Parametric Naive Bayes Classifier
+plot.bernoulli_naive_bayes
+                        Plot Method for bernoulli_naive_bayes Objects
+plot.gaussian_naive_bayes
+                        Plot Method for gaussian_naive_bayes Objects
+plot.naive_bayes        Plot Method for naive_bayes Objects
+plot.nonparametric_naive_bayes
+                        Plot Method for nonparametric_naive_bayes
+                        Objects
+plot.poisson_naive_bayes
+                        Plot Method for poisson_naive_bayes Objects
+poisson_naive_bayes     Poisson Naive Bayes Classifier
+predict.bernoulli_naive_bayes
+                        Predict Method for bernoulli_naive_bayes
+                        Objects
+predict.gaussian_naive_bayes
+                        Predict Method for gaussian_naive_bayes Objects
+predict.multinomial_naive_bayes
+                        Predict Method for multinomial_naive_bayes
+                        Objects
+predict.naive_bayes     Predict Method for naive_bayes Objects
+predict.nonparametric_naive_bayes
+                        Predict Method for nonparametric_naive_bayes
+                        Objects
+predict.poisson_naive_bayes
+                        Predict Method for poisson_naive_bayes Objects
+tables                  Browse Tables of Naive Bayes Classifier

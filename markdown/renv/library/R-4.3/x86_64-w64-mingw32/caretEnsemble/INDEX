@@ -1,0 +1,87 @@
+[.caretList             Index a caretList
+as.caretList            Convert object to caretList object
+as.caretList.default    Convert object to caretList object - For Future
+                        Use
+as.caretList.list       Convert list to caretList
+autoplot                Convenience function for more in-depth
+                        diagnostic plots of caretEnsemble objects
+bestPreds               Extract the best predictions from a train
+                        object
+c.caretList             S3 definition for concatenating caretList
+c.train                 S3 definition for concatenating train objects
+caretEnsemble           caretEnsemble: Make ensembles of caret models.
+caretList               Create a list of several train models from the
+                        caret package Build a list of train objects
+                        suitable for ensembling using the
+                        'caretEnsemble' function.
+caretModelSpec          Generate a specification for fitting a caret
+                        model
+caretStack              Combine several predictive models via stacking
+check_bestpreds_indexes
+                        Check row indexes
+check_bestpreds_obs     Check observeds
+check_bestpreds_preds   Check predictions
+check_bestpreds_resamples
+                        Check resamples
+check_caretList_classes
+                        Checks caretList model classes
+check_caretList_model_types
+                        Checks that caretList models are all of the
+                        same type.
+dotplot.caretStack      Comparison dotplot for a caretStack object
+extractBestPreds        Extract the best predictions from a list of
+                        train objects
+extractCaretTarget      Extracts the target variable from a set of
+                        arguments headed to the caret::train function.
+extractCaretTarget.default
+                        Extracts the target variable from a set of
+                        arguments headed to the caret::train.default
+                        function.
+extractCaretTarget.formula
+                        Extracts the target variable from a set of
+                        arguments headed to the caret::train.formula
+                        function.
+extractModFrame         Extract a dataframe of all predictors used in a
+                        caretEnsemble object.
+extractModRes           Extract the model accuracy metrics of the
+                        individual models in an ensemble object.
+extractModelName        Extract the method name associated with a
+                        single train object
+extractModelTypes       Extracts the model types from a list of train
+                        model
+fortify                 Supplement the data fitted to a caret ensemble
+                        model with model fit statistics
+getBinaryTargetLevel    Return the configured target binary class level
+getMetric               Extract accuracy metrics from a model
+is.caretEnsemble        Check if an object is a caretEnsemble object
+is.caretList            Check if an object is a caretList object
+is.caretStack           Check if an object is a caretStack object
+makePredObsMatrix       Make a prediction matrix from a list of models
+methodCheck             Check that the methods supplied by the user are
+                        valid caret methods
+models.class            caretList of classification models
+multiResiduals          Calculate the residuals from all component
+                        models of a caretEnsemble.
+plot.caretEnsemble      Plot Diagnostics for an caretEnsemble Object
+plot.caretStack         Plot a caretStack object
+predict.caretList       Create a matrix of predictions for each of the
+                        models in a caretList
+predict.caretStack      Make predictions from a caretStack
+print.caretStack        Print a caretStack object
+residuals.caretEnsemble
+                        Calculate the residuals from a caretEnsemble.
+setBinaryTargetLevel    Set the target binary class level
+summary.caretEnsemble   Summarize the results of caretEnsemble for the
+                        user.
+summary.caretStack      Summarize a caretStack object
+trControlCheck          Check that the trainControl object supplied by
+                        the user is valid and has defined re-sampling
+                        indexes.
+tuneCheck               Check that the tuning parameters list supplied
+                        by the user is valid
+validateBinaryTargetLevel
+                        Validate arguments given as binary target level
+validateCustomModel     Validate a custom caret model info list
+varImp.caretEnsemble    Calculate the variable importance of variables
+                        in a caretEnsemble.
+wtd.sd                  Calculate a weighted standard deviation

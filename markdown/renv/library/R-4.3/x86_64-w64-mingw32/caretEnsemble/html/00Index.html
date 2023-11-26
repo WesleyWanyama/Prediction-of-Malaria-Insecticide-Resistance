@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head><title>R: Ensembles of Caret Models</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body><div class="container">
+<h1> Ensembles of Caret Models
+<img class="toplogo" src="../../../doc/html/Rlogo.svg" alt="[R logo]" />
+</h1>
+<hr/>
+<div style="text-align: center;">
+<a href="../../../doc/html/packages.html"><img class="arrow" src="../../../doc/html/left.jpg" alt="[Up]" /></a>
+<a href="../../../doc/html/index.html"><img class="arrow" src="../../../doc/html/up.jpg" alt="[Top]" /></a>
+</div><h2>Documentation for package &lsquo;caretEnsemble&rsquo; version 2.0.3</h2>
+
+<ul><li><a href="../DESCRIPTION">DESCRIPTION file</a>.</li>
+<li><a href="../doc/index.html">User guides, package vignettes and other documentation.</a></li>
+<li><a href="../NEWS">Package NEWS</a>.</li>
+</ul>
+
+<h2>Help Pages</h2>
+
+
+<table style="width: 100%;">
+<tr><td style="width: 25%;"><a href="caretEnsemble.html">caretEnsemble-package</a></td>
+<td>caretEnsemble: Make ensembles of caret models.</td></tr>
+<tr><td style="width: 25%;"><a href="as.caretList.html">as.caretList</a></td>
+<td>Convert object to caretList object</td></tr>
+<tr><td style="width: 25%;"><a href="as.caretList.default.html">as.caretList.default</a></td>
+<td>Convert object to caretList object - For Future Use</td></tr>
+<tr><td style="width: 25%;"><a href="as.caretList.list.html">as.caretList.list</a></td>
+<td>Convert list to caretList</td></tr>
+<tr><td style="width: 25%;"><a href="autoplot.html">autoplot</a></td>
+<td>Convenience function for more in-depth diagnostic plots of caretEnsemble objects</td></tr>
+<tr><td style="width: 25%;"><a href="bestPreds.html">bestPreds</a></td>
+<td>Extract the best predictions from a train object</td></tr>
+<tr><td style="width: 25%;"><a href="c.caretList.html">c.caretList</a></td>
+<td>S3 definition for concatenating caretList</td></tr>
+<tr><td style="width: 25%;"><a href="c.train.html">c.train</a></td>
+<td>S3 definition for concatenating train objects</td></tr>
+<tr><td style="width: 25%;"><a href="caretEnsemble.html">caretEnsemble</a></td>
+<td>caretEnsemble: Make ensembles of caret models.</td></tr>
+<tr><td style="width: 25%;"><a href="caretList.html">caretList</a></td>
+<td>Create a list of several train models from the caret package Build a list of train objects suitable for ensembling using the 'caretEnsemble' function.</td></tr>
+<tr><td style="width: 25%;"><a href="caretModelSpec.html">caretModelSpec</a></td>
+<td>Generate a specification for fitting a caret model</td></tr>
+<tr><td style="width: 25%;"><a href="caretStack.html">caretStack</a></td>
+<td>Combine several predictive models via stacking</td></tr>
+<tr><td style="width: 25%;"><a href="check_bestpreds_indexes.html">check_bestpreds_indexes</a></td>
+<td>Check row indexes</td></tr>
+<tr><td style="width: 25%;"><a href="check_bestpreds_obs.html">check_bestpreds_obs</a></td>
+<td>Check observeds</td></tr>
+<tr><td style="width: 25%;"><a href="check_bestpreds_preds.html">check_bestpreds_preds</a></td>
+<td>Check predictions</td></tr>
+<tr><td style="width: 25%;"><a href="check_bestpreds_resamples.html">check_bestpreds_resamples</a></td>
+<td>Check resamples</td></tr>
+<tr><td style="width: 25%;"><a href="check_caretList_classes.html">check_caretList_classes</a></td>
+<td>Checks caretList model classes</td></tr>
+<tr><td style="width: 25%;"><a href="check_caretList_model_types.html">check_caretList_model_types</a></td>
+<td>Checks that caretList models are all of the same type.</td></tr>
+<tr><td style="width: 25%;"><a href="dotplot.caretStack.html">dotplot.caretStack</a></td>
+<td>Comparison dotplot for a caretStack object</td></tr>
+<tr><td style="width: 25%;"><a href="extractBestPreds.html">extractBestPreds</a></td>
+<td>Extract the best predictions from a list of train objects</td></tr>
+<tr><td style="width: 25%;"><a href="extractCaretTarget.html">extractCaretTarget</a></td>
+<td>Extracts the target variable from a set of arguments headed to the caret::train function.</td></tr>
+<tr><td style="width: 25%;"><a href="extractCaretTarget.default.html">extractCaretTarget.default</a></td>
+<td>Extracts the target variable from a set of arguments headed to the caret::train.default function.</td></tr>
+<tr><td style="width: 25%;"><a href="extractCaretTarget.formula.html">extractCaretTarget.formula</a></td>
+<td>Extracts the target variable from a set of arguments headed to the caret::train.formula function.</td></tr>
+<tr><td style="width: 25%;"><a href="extractModelName.html">extractModelName</a></td>
+<td>Extract the method name associated with a single train object</td></tr>
+<tr><td style="width: 25%;"><a href="extractModelTypes.html">extractModelTypes</a></td>
+<td>Extracts the model types from a list of train model</td></tr>
+<tr><td style="width: 25%;"><a href="extractModFrame.html">extractModFrame</a></td>
+<td>Extract a dataframe of all predictors used in a caretEnsemble object.</td></tr>
+<tr><td style="width: 25%;"><a href="extractModRes.html">extractModRes</a></td>
+<td>Extract the model accuracy metrics of the individual models in an ensemble object.</td></tr>
+<tr><td style="width: 25%;"><a href="fortify.html">fortify</a></td>
+<td>Supplement the data fitted to a caret ensemble model with model fit statistics</td></tr>
+<tr><td style="width: 25%;"><a href="getBinaryTargetLevel.html">getBinaryTargetLevel</a></td>
+<td>Return the configured target binary class level</td></tr>
+<tr><td style="width: 25%;"><a href="metrics.html">getMetric</a></td>
+<td>Extract accuracy metrics from a model</td></tr>
+<tr><td style="width: 25%;"><a href="metrics.html">getMetric.train</a></td>
+<td>Extract accuracy metrics from a model</td></tr>
+<tr><td style="width: 25%;"><a href="metrics.html">getMetricSD</a></td>
+<td>Extract accuracy metrics from a model</td></tr>
+<tr><td style="width: 25%;"><a href="metrics.html">getMetricSD.train</a></td>
+<td>Extract accuracy metrics from a model</td></tr>
+<tr><td style="width: 25%;"><a href="is.caretEnsemble.html">is.caretEnsemble</a></td>
+<td>Check if an object is a caretEnsemble object</td></tr>
+<tr><td style="width: 25%;"><a href="is.caretList.html">is.caretList</a></td>
+<td>Check if an object is a caretList object</td></tr>
+<tr><td style="width: 25%;"><a href="is.caretStack.html">is.caretStack</a></td>
+<td>Check if an object is a caretStack object</td></tr>
+<tr><td style="width: 25%;"><a href="makePredObsMatrix.html">makePredObsMatrix</a></td>
+<td>Make a prediction matrix from a list of models</td></tr>
+<tr><td style="width: 25%;"><a href="methodCheck.html">methodCheck</a></td>
+<td>Check that the methods supplied by the user are valid caret methods</td></tr>
+<tr><td style="width: 25%;"><a href="data.html">models.class</a></td>
+<td>caretList of classification models</td></tr>
+<tr><td style="width: 25%;"><a href="data.html">models.reg</a></td>
+<td>caretList of classification models</td></tr>
+<tr><td style="width: 25%;"><a href="multiResiduals.html">multiResiduals</a></td>
+<td>Calculate the residuals from all component models of a caretEnsemble.</td></tr>
+<tr><td style="width: 25%;"><a href="plot.caretEnsemble.html">plot.caretEnsemble</a></td>
+<td>Plot Diagnostics for an caretEnsemble Object</td></tr>
+<tr><td style="width: 25%;"><a href="plot.caretStack.html">plot.caretStack</a></td>
+<td>Plot a caretStack object</td></tr>
+<tr><td style="width: 25%;"><a href="predict.caretList.html">predict.caretList</a></td>
+<td>Create a matrix of predictions for each of the models in a caretList</td></tr>
+<tr><td style="width: 25%;"><a href="predict.caretStack.html">predict.caretStack</a></td>
+<td>Make predictions from a caretStack</td></tr>
+<tr><td style="width: 25%;"><a href="print.caretStack.html">print.caretStack</a></td>
+<td>Print a caretStack object</td></tr>
+<tr><td style="width: 25%;"><a href="residuals.caretEnsemble.html">residuals.caretEnsemble</a></td>
+<td>Calculate the residuals from a caretEnsemble.</td></tr>
+<tr><td style="width: 25%;"><a href="setBinaryTargetLevel.html">setBinaryTargetLevel</a></td>
+<td>Set the target binary class level</td></tr>
+<tr><td style="width: 25%;"><a href="summary.caretEnsemble.html">summary.caretEnsemble</a></td>
+<td>Summarize the results of caretEnsemble for the user.</td></tr>
+<tr><td style="width: 25%;"><a href="summary.caretStack.html">summary.caretStack</a></td>
+<td>Summarize a caretStack object</td></tr>
+<tr><td style="width: 25%;"><a href="trControlCheck.html">trControlCheck</a></td>
+<td>Check that the trainControl object supplied by the user is valid and has defined re-sampling indexes.</td></tr>
+<tr><td style="width: 25%;"><a href="tuneCheck.html">tuneCheck</a></td>
+<td>Check that the tuning parameters list supplied by the user is valid</td></tr>
+<tr><td style="width: 25%;"><a href="validateBinaryTargetLevel.html">validateBinaryTargetLevel</a></td>
+<td>Validate arguments given as binary target level</td></tr>
+<tr><td style="width: 25%;"><a href="validateCustomModel.html">validateCustomModel</a></td>
+<td>Validate a custom caret model info list</td></tr>
+<tr><td style="width: 25%;"><a href="varImp.caretEnsemble.html">varImp.caretEnsemble</a></td>
+<td>Calculate the variable importance of variables in a caretEnsemble.</td></tr>
+<tr><td style="width: 25%;"><a href="wtd.sd.html">wtd.sd</a></td>
+<td>Calculate a weighted standard deviation</td></tr>
+<tr><td style="width: 25%;"><a href="data.html">X.class</a></td>
+<td>caretList of classification models</td></tr>
+<tr><td style="width: 25%;"><a href="data.html">X.reg</a></td>
+<td>caretList of classification models</td></tr>
+<tr><td style="width: 25%;"><a href="data.html">Y.class</a></td>
+<td>caretList of classification models</td></tr>
+<tr><td style="width: 25%;"><a href="data.html">Y.reg</a></td>
+<td>caretList of classification models</td></tr>
+<tr><td style="width: 25%;"><a href="sub-.caretList.html">[.caretList</a></td>
+<td>Index a caretList</td></tr>
+</table>
+</div></body></html>
